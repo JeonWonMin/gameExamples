@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+</head>
+<body>
+<h1 class="hint">숫자 맞추기 게임</h1>
+<div class="guesscount">0</div>
+<form id="game_form" name="game_form">
+    <label for="guess">숫자 입력</label>
+    <input type="text" name="guess">
+    <a href="#" value="Guess!" id="guess">확인!</a>
+</form>
+<script>
+    var answer;
+    var guesses = 0;
+    //var hint = '';
+
+    function randomNumber(seed){
+        seed = seed || 10;
+        return Math.floor(Math.random() * seed + 1);
+    }
+
+    function checkGuess(guess){
+        var hint = '';
+        var parsedGuess = parseInt(guess, 10);
+        guesses++;
+        if (parsedGuess == answer) {
+            hint = '정답!';
+        } else if (parsedGuess < answer) {
+            hint = '더 높게...';
+        } else {
+            hint = '더 낮게...';
+        }
+        return hint;
+    }
+
+    $(document).ready(function(){
+        answer = randomNumber(10);
+        $('form a#guess').click(function(){
+            var guess = $('input:first').val();
+            var guessHint = checkGuess(guess);
+            $('.hint').html(guessHint);
+            $('.guesscount').html(guesses);
+        });
+    });
+</script>
+</body>
+</html>
