@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #canvas {
+            border: 1px solid crimson;
+        }
+    </style>
+</head>
+<body>
+<canvas id="canvas" width="500" height="400"></canvas>
+<script>
+    var context,
+        x = 100, y = 150,
+        dx = 5, dy = 5,
+        WIDTH = 500, HEIGHT = 400;
+
+    function init(id) {
+        context = document.getElementById(id).getContext('2d');
+        window.addEventListener('keydown', keyDown, true);
+        return setInterval(draw, 10);
+    }
+    function keyDown(event) {
+        switch (event.keyCode) {
+            case 87: // w
+            case 38: // up arrow
+                if (y - dy > 0) {
+                    y -= dy;
+                }
+                break;
+
+            case 65: // a
+            case 37: // left arrow
+                if (x - dx > 0) {
+                    x -= dx;
+                }
+                break;
+
+            case 83: // s
+            case 40: // down arrow
+                if (y + dy < HEIGHT) {
+                    y += dy;
+                }
+                break;
+
+            case 68: // d
+            case 39: // right arrow
+                if (x + dx < WIDTH) {
+                    x += dx;
+                }
+                break;
+        }
+    }
+    function clear() {
+        context.clearRect(0, 0, WIDTH, HEIGHT);
+    }
+    function rectangle(x, y, width, height) {
+        context.beginPath();
+        context.rect(x, y, width, height);
+        context.closePath();
+        context.fill();
+        context.stroke();
+    }
+    function draw() {
+        clear();
+        context.fillStyle = "darkblue";
+        context.strokeStyle = "crimson";
+        rectangle(x, y, 30, 50);
+    }
+
+    init('canvas');
+</script>
+</body>
+</html>
