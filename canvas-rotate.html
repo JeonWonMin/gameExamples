@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #canvas {
+            border: 1px solid darkblue;
+        }
+    </style>
+</head>
+<body>
+<canvas id="canvas" width="500" height="125"></canvas>
+<script>
+    function drawRectangle(context, fillStyle) {
+        context.fillStyle = fillStyle || 'darkblue';
+        context.fillRect(-30, -30, 60, 80);
+    }
+    function dot(context) {
+        context.save();
+        context.fillStyle = 'black';
+        context.fillRect(-2, 8, 4, 4);
+        context.restore();
+    }
+    function draw(canvasId) {
+        var context = document.getElementById(canvasId).getContext('2d');
+
+        // for canvas
+        context.translate(45, 45);
+        context.save();
+
+        // for red
+        drawRectangle(context, 'red');
+        dot(context);
+        context.restore();
+        context.save();
+        context.translate(100, 5);
+        context.rotate(45 * Math.PI / 180);
+
+        // for green
+        drawRectangle(context, 'green');
+        dot(context);
+        context.restore();
+        context.save();
+        context.translate(200, 10);
+        context.rotate(90 * Math.PI / 180);
+
+        // for blue
+        drawRectangle(context, 'blue');
+        dot(context);
+        context.restore();
+        context.save();
+        context.translate(300, 20);
+        context.rotate(135 * Math.PI / 180);
+
+        // for yellow
+        drawRectangle(context, 'yellow');
+        dot(context);
+        context.restore();
+        context.save();
+        context.translate(400, 0);
+        context.rotate(0 * Math.PI / 180);
+
+        // for crimson
+        drawRectangle(context, 'crimson');
+        dot(context);
+        context.restore();
+    }
+    draw('canvas');
+</script>
+</body>
+</html>

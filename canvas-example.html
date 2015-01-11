@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #canvas {
+            border: 1px solid crimson;
+        }
+    </style>
+</head>
+<body>
+<canvas id="canvas" width="270" height="270"></canvas>
+<script>
+    var canvas = document.getElementById('canvas');
+    var context = canvas.getContext('2d');
+    context.fillStyle = 'gray';
+    context.fillRect(30, 30, 200, 200);
+</script>
+</body>
+</html>

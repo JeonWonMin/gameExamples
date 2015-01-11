@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #fps {
+            clear: both;
+        }
+        #canvas {
+            clear: both;
+            border: 1px solid crimson;
+        }
+    </style>
+</head>
+<body>
+<canvas id="canvas" width="800" height="600">You need a better browser.</canvas>
+<script>
+    var context,
+        WIDTH = 800,
+        HEIGHT = 600,
+        x, y,
+        dx = 4, dy = 8,
+        lastTime = new Date(),
+        fps = 0, frameCount = 0;
+
+    function randomNumber(max) {
+        return Math.floor(Math.random() * max + 1);
+    }
+    function setXY() {
+        x = randomNumber(WIDTH);
+        y = randomNumber(HEIGHT);
+    }
+    function clear() {
+        context.clearRect(0, 0, WIDTH, HEIGHT);
+    }
+    function drawCircle(x, y, radius) {
+        context.beginPath();
+        context.arc(x, y, radius, 0, Math.PI * 2, true);
+        context.fill();
+    }
+    function draw(canvasId) {
+        clear();
+        context.fillStyle = "darkblue";
+        drawCircle(x, y, 75);
+        context.fillStyle = "white";
+        drawCircle(x, y, 10);
+
+        if ( (x + dx > WIDTH - 75) || (x + dx < 75) ) {
+            dx = -dx;
+        }
+        if ( (y + dy > HEIGHT - 75) || (y + dy < 75) ) {
+            dy = -dy;
+        }
+
+        x += dx;
+        y += dy;
+    }
+    function init(canvasId) {
+        context = document.getElementById(canvasId).getContext('2d');
+        setXY();
+        return window.setInterval(draw, 10);
+    }
+
+    init('canvas');
+</script>
+</body>
+</html>
